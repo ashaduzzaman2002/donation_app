@@ -9,7 +9,7 @@ function sendPostRequest($url, $fields){
     curl_close($ch);
 }
 
-$apiFor = "Admin_Login";
+$apiFor = "Public_Login";
 
 if($apiFor == "Admin_Login"){
     $fields = array(
@@ -17,5 +17,12 @@ if($apiFor == "Admin_Login"){
     'password' => 'admin',
     );
     sendPostRequest("http://localhost/donation_app/admin_apis/login_api.php", $fields);
+}
+else if($apiFor == "Public_Login"){
+    $fields = array(
+    'phone' => '+918653826902',
+    'password' => 'public',
+    );
+    sendPostRequest("http://localhost/donation_app/public_apis/login_api.php", $fields);
 }
 ?>
