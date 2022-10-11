@@ -1,11 +1,11 @@
 profile = document.getElementById("profile");
 
-let isLogin = true;
+let isLogin = false;
 
 !isLogin
   ? (profile.innerHTML = `
 <div class="login-btn">
-            <button>Login</button>
+            <button><a href='login.html'>Login</a></button>
         </div>`)
   : (profile.innerHTML = `
         <img src="images/profile3.png" alt="" />`);

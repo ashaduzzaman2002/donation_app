@@ -69,10 +69,15 @@ nav{
 
 .login-btn button{
     background-color: #7ed957;
-    color: #fff;
     border: none;
+    padding: 0.7rem 1.8rem;
+    border-radius: 4px;
+}
+
+.login-btn button a{
+    text-decoration: none;
+    color: #fff;
     font-size: 1.2rem;
-    padding: 0.8rem 2rem;
     text-transform: uppercase;
 }
 
