@@ -19,7 +19,6 @@ if($mandatoryVal){
     if($processStatus[0]["error"] == false && strlen($phone) > 0 && strlen($password) > 0){
 
         // Data fetching Part
-        $userData = array();
         $sql= "Select * from public where phone = '$phone' and password = '$password' LIMIT 1";
         $res = $conn->query($sql);
         if($res->num_rows > 0){

@@ -9,17 +9,17 @@ function getSafeValue($value){
 $processStatus[0]["error"] = false;
 $processStatus[0]["message"] = "No Error";
 
-$mandatoryVal = isset($_POST["username"]) && isset($_POST["password"]);
+$mandatoryVal = isset($_POST["phone"]) && isset($_POST["password"]);
 
 if($mandatoryVal){
-    $username = getSafeValue($_POST['username']);
+    $phone = getSafeValue($_POST['phone']);
     $password = getSafeValue($_POST['password']);
 
     // Validation Part
-    if($processStatus[0]["error"] == false && strlen($username) > 0 && strlen($password) > 0){
+    if($processStatus[0]["error"] == false && strlen($phone) > 0 && strlen($password) > 0){
 
         // Data fetching Part
-        $sql= "Select * from admin where username = '$username' and password = '$password' LIMIT 1";
+        $sql= "Select * from agent where phone = '$phone' and password = '$password' LIMIT 1";
         $res = $conn->query($sql);
         if($res->num_rows > 0){
             while($row = $res->fetch_assoc()){
@@ -38,7 +38,7 @@ if($mandatoryVal){
 }else{
     // Error Part
     $processStatus[0]["error"] = true;
-    $processStatus[0]["message"] = "Username and Password is mandatory.";
+    $processStatus[0]["message"] = "phone and Password is mandatory.";
 }
 mysqli_close($conn);
 header('Content-Type: application/json');
