@@ -9,7 +9,7 @@ function sendPostRequest($url, $fields){
     curl_close($ch);
 }
 
-$apiFor = "Get_Agent_List";
+$apiFor = "Fetch_Feed";
 
 if($apiFor == "Admin_Login"){
     $fields = array(
@@ -43,6 +43,13 @@ else if($apiFor == "Public_Login"){
     'password' => 'public',
     );
     sendPostRequest("http://localhost/donation_app/public_apis/login_api.php", $fields);
+}
+else if($apiFor == "Fetch_Feed"){
+    $fields = array(
+    'lastPostId' => '0',
+    'postLimit' => '5',
+    );
+    sendPostRequest("http://localhost/donation_app/public_apis/fetch_feed_api.php", $fields);
 }
 else if($apiFor == "Agent_Login"){
     $fields = array(
