@@ -9,7 +9,7 @@ function sendPostRequest($url, $fields){
     curl_close($ch);
 }
 
-$apiFor = "Fetch_Feed";
+$apiFor = "Change_Public_Password";
 
 if($apiFor == "Admin_Login"){
     $fields = array(
@@ -44,12 +44,29 @@ else if($apiFor == "Public_Login"){
     );
     sendPostRequest("http://localhost/donation_app/public_apis/login_api.php", $fields);
 }
+else if($apiFor == "Change_Public_Password"){
+    $fields = array(
+    'public_id' => '7',
+    'currentPassword' => 'public1',
+    'newPassword' => 'vivek',
+    'confirmPassword' => 'vivek'
+    );
+    sendPostRequest("http://localhost/donation_app/public_apis/change_password_api.php", $fields);
+}
 else if($apiFor == "Fetch_Feed"){
     $fields = array(
     'lastPostId' => '0',
     'postLimit' => '5',
     );
     sendPostRequest("http://localhost/donation_app/public_apis/fetch_feed_api.php", $fields);
+}
+else if($apiFor == "Update_Wallet_Amount"){
+    $fields = array(
+    'public_id' => '5',
+    'amount' => '5',
+    'status' => 'Active',
+    );
+    sendPostRequest("http://localhost/donation_app/public_apis/update_wallet_amount_api.php", $fields);
 }
 else if($apiFor == "Agent_Login"){
     $fields = array(

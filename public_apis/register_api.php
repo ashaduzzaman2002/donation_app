@@ -94,6 +94,8 @@ if($mandatoryVal){
                 ";
             $conn->query($sql);
             if($conn->affected_rows > 0){
+                $lastPublicId = $conn->insert_id;
+                $conn->query("Insert into wallet set public_id = 'lastPublicId', amount = 0.0, status = 'Active'");
                 $processStatus[0]["error"] = false;
                 $processStatus[0]["message"] = "Registered Successfully";
             } else{
