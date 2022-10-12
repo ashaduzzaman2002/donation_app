@@ -9,7 +9,7 @@ function sendPostRequest($url, $fields){
     curl_close($ch);
 }
 
-$apiFor = "Change_Admin_Basic_Details";
+$apiFor = "Add_Update_Bank_Details";
 
 if($apiFor == "Admin_Login"){
     $fields = array(
@@ -89,6 +89,16 @@ else if($apiFor == "Change_Public_Basic_Details"){
     'password' => 'vivek',
     );
     sendPostRequest("http://localhost/donation_app/public_apis/change_basic_details_api.php", $fields);
+}
+else if($apiFor == "Add_Update_Bank_Details"){
+    $fields = array(
+    'public_id' => '7',
+    'account_number' => '741896542366',
+    'ifsc_code' => 'CBIN02136745',
+    'bank_name' => 'Central Bank of India',
+    'ac_holder_name' => 'Jhon',
+    );
+    sendPostRequest("http://localhost/donation_app/public_apis/update_bank_ac_api.php", $fields);
 }
 else if($apiFor == "Fetch_Feed"){
     $fields = array(
