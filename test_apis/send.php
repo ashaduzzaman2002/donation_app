@@ -9,7 +9,7 @@ function sendPostRequest($url, $fields){
     curl_close($ch);
 }
 
-$apiFor = "Change_Public_Password";
+$apiFor = "Change_Admin_Basic_Details";
 
 if($apiFor == "Admin_Login"){
     $fields = array(
@@ -17,6 +17,25 @@ if($apiFor == "Admin_Login"){
     'password' => 'admin',
     );
     sendPostRequest("http://localhost/donation_app/admin_apis/login_api.php", $fields);
+}
+else if($apiFor == "Change_Admin_Password"){
+    $fields = array(
+    'admin_id' => '1',
+    'currentPassword' => 'admin',
+    'newPassword' => 'somewhat',
+    'confirmPassword' => 'somewhat'
+    );
+    sendPostRequest("http://localhost/donation_app/admin_apis/change_password_api.php", $fields);
+}
+else if($apiFor == "Change_Admin_Basic_Details"){
+    $fields = array(
+    'admin_id' => '1',
+    'fullname' => 'Igloo',
+    'phone' => '9638527410',
+    'email' => 'admin@donate.com',
+    'password' => 'admin',
+    );
+    sendPostRequest("http://localhost/donation_app/admin_apis/change_basic_details_api.php", $fields);
 }
 else if($apiFor == "Register_Agent"){
     $fields = array(
@@ -37,6 +56,12 @@ else if($apiFor == "Get_Agent_List"){
     );
     sendPostRequest("http://localhost/donation_app/admin_apis/get_agent_list_api.php", $fields);
 }
+else if($apiFor == "Get_Public_List"){
+    $fields = array(
+        'scriptPassword' => 'SaltedPassword'
+    );
+    sendPostRequest("http://localhost/donation_app/admin_apis/get_public_list_api.php", $fields);
+}
 else if($apiFor == "Public_Login"){
     $fields = array(
     'phone' => '+918653826902',
@@ -52,6 +77,18 @@ else if($apiFor == "Change_Public_Password"){
     'confirmPassword' => 'vivek'
     );
     sendPostRequest("http://localhost/donation_app/public_apis/change_password_api.php", $fields);
+}
+else if($apiFor == "Change_Public_Basic_Details"){
+    $fields = array(
+    'public_id' => '7',
+    'fullname' => 'Hrithik',
+    'phone' => '7418529630',
+    'email' => 'vivek@ok.in',
+    'address' => 'Hastinapur',
+    'pincode' => '789456',
+    'password' => 'vivek',
+    );
+    sendPostRequest("http://localhost/donation_app/public_apis/change_basic_details_api.php", $fields);
 }
 else if($apiFor == "Fetch_Feed"){
     $fields = array(

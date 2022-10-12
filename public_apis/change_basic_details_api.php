@@ -9,28 +9,35 @@ function getSafeValue($value){
 $processStatus[0]["error"] = false;
 $processStatus[0]["message"] = "No Error";
 
-$mandatoryVal = isset($_POST["public_id"]) && isset($_POST["currentPassword"]) && isset($_POST["newPassword"]) && isset($_POST["confirmPassword"]);
+$mandatoryVal = isset($_POST["public_id"]) && isset($_POST["fullname"]) && isset($_POST["phone"]) && isset($_POST["email"]) && isset($_POST["address"]) && isset($_POST["pincode"]) && isset($_POST["password"]);
 
 if($mandatoryVal){
     $public_id = getSafeValue($_POST['public_id']);
-    $currentPassword = getSafeValue($_POST['currentPassword']);
-    $newPassword = getSafeValue($_POST['newPassword']);
-    $confirmPassword = getSafeValue($_POST['confirmPassword']);
+    $fullname = getSafeValue($_POST['fullname']);
+    $phone = "+91".getSafeValue($_POST['phone']);
+    $email = getSafeValue($_POST['email']);
+    $address = getSafeValue($_POST['address']);
+    $pincode = getSafeValue($_POST['pincode']);
+    $password = getSafeValue($_POST['password']);
 
     // Validation Part
-    if($processStatus[0]["error"] == false && $public_id > 0 && strlen($currentPassword) >= 3 && strlen($newPassword) >= 3 && strlen($confirmPassword) >= 3 && $newPassword == $confirmPassword){
+    if($processStatus[0]["error"] == false && $public_id > 0 && strlen($phone) == 13){
 
         // Data Checking Part
-        $sql= "Select * from public where id='$public_id' and password = '$currentPassword' LIMIT 1";
+        $sql= "Select * from public where id='$public_id' and password = '$password' LIMIT 1";
         $res = $conn->query($sql);
         if($res->num_rows > 0){
             $conn->query("Update public set 
-            password = '$newPassword' 
-            where id = '$public_id' and password ='$currentPassword'
+            fullname = '$fullname',
+            phone = '$phone',
+            email = '$email',
+            address = '$address',
+            pincode = '$pincode' 
+            where id = '$public_id' and password ='$password'
             ");
             if($conn->affected_rows > 0){
                 $processStatus[0]["error"] = false;
-                $processStatus[0]["message"] = "Password Changed.";
+                $processStatus[0]["message"] = "Basic Details Updated.";
             }else{
                 // Error Part
                 $processStatus[0]["error"] = true;
@@ -49,7 +56,7 @@ if($mandatoryVal){
 }else{
     // Error Part
     $processStatus[0]["error"] = true;
-    $processStatus[0]["message"] = "CURRPSS, NWPSS, CNFPSS is mandatory.";
+    $processStatus[0]["message"] = "FN, ADDR, PIN, PHN, EM, ID, PWD is mandatory.";
 }
 mysqli_close($conn);
 header('Content-Type: application/json');
