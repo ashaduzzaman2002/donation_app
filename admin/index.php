@@ -5,19 +5,19 @@ include "../constant.inc.php";
 session_start();
 $err_msg = 'Login to start your session';
 
-if(isset($_COOKIE['admin_phone']) && $_COOKIE['admin_phone']!='' && isset($_COOKIE['admin_password']) && $_COOKIE['admin_password']!=''){
-  $phone = getSafeValue($_COOKIE['admin_phone']);
+if(isset($_COOKIE['admin_username']) && $_COOKIE['admin_username']!='' && isset($_COOKIE['admin_password']) && $_COOKIE['admin_password']!=''){
+  $username = getSafeValue($_COOKIE['admin_username']);
   $md_password = getSafeValue($_COOKIE['admin_password']);
 
-  $res = mysqli_query($conn, "Select * from admin where phone = '$phone' and password = '$md_password'");
+  $res = mysqli_query($conn, "Select * from admin where username = '$username' and password = '$md_password'");
   if(mysqli_num_rows($res) > 0){
     while($row = mysqli_fetch_assoc($res)){
       $err_msg = "<span style = 'color: green;'>Credentials Accepted! Redirecting to Dashboard</span>";
-      setcookie('admin_phone',$phone,time() + (86400 * 30), "/");
+      setcookie('admin_username',$username,time() + (86400 * 30), "/");
       setcookie('admin_password',$md_password,time() + (86400 * 30), "/");
-      $_SESSION['admin_phone'] = $phone;
+      $_SESSION['admin_username'] = $username;
       $_SESSION['admin_password'] = $md_password;
-      header("location:admin_dashboard");
+      header("location:admin_dashboard.php");
     }
   }
   else{
@@ -25,19 +25,19 @@ if(isset($_COOKIE['admin_phone']) && $_COOKIE['admin_phone']!='' && isset($_COOK
   }
 }
 
-elseif(isset($_SESSION['admin_phone']) && $_SESSION['admin_phone']!='' && isset($_SESSION['admin_password']) && $_SESSION['admin_password']!=''){
-  $phone = getSafeValue($_SESSION['admin_phone']);
+elseif(isset($_SESSION['admin_username']) && $_SESSION['admin_username']!='' && isset($_SESSION['admin_password']) && $_SESSION['admin_password']!=''){
+  $username = getSafeValue($_SESSION['admin_username']);
   $md_password = getSafeValue($_SESSION['admin_password']);
 
-  $res = mysqli_query($conn, "Select * from admin where phone = '$phone' and password = '$md_password'");
+  $res = mysqli_query($conn, "Select * from admin where username = '$username' and password = '$md_password'");
   if(mysqli_num_rows($res) > 0){
     while($row = mysqli_fetch_assoc($res)){
       $err_msg = "<span style = 'color: green;'>Credentials Accepted! Redirecting to Dashboard</span>";
-      setcookie('admin_phone',$phone,time() + (86400 * 30), "/");
+      setcookie('admin_username',$username,time() + (86400 * 30), "/");
       setcookie('admin_password',$md_password,time() + (86400 * 30), "/");
-      $_SESSION['admin_phone'] = $phone;
+      $_SESSION['admin_username'] = $username;
       $_SESSION['admin_password'] = $md_password;
-      header("location:admin_dashboard");
+      header("location:admin_dashboard.php");
     }
   }
   else{
@@ -47,21 +47,22 @@ elseif(isset($_SESSION['admin_phone']) && $_SESSION['admin_phone']!='' && isset(
 
 
 if(isset($_POST['sign_in_btn'])){
-  $phone = getSafeValue($_POST['phone']);
+  $username = getSafeValue($_POST['username']);
   $password = getSafeValue($_POST['password']);
   $md_password = md5($password);
+  $md_password = $password;
 
-  $res = mysqli_query($conn, "Select * from admin where phone = '$phone' and password = '$md_password'");
+  $res = mysqli_query($conn, "Select * from admin where username = '$username' and password = '$md_password'");
   if(mysqli_num_rows($res) > 0){
     while($row = mysqli_fetch_assoc($res)){
       $err_msg = "<span style = 'color: green;'>Credentials Accepted! Redirecting to Dashboard</span>";
       if(isset($_POST['remember_me'])){
-        setcookie('admin_phone',$phone,time() + (86400 * 30), "/");
+        setcookie('admin_username',$username,time() + (86400 * 30), "/");
         setcookie('admin_password',$md_password,time() + (86400 * 30), "/");
       }
-      $_SESSION['admin_phone'] = $phone;
+      $_SESSION['admin_username'] = $username;
       $_SESSION['admin_password'] = $md_password;
-      header("location:admin_dashboard");
+      header("location:admin_dashboard.php");
     }
   }
   else{
@@ -97,7 +98,7 @@ if(isset($_POST['sign_in_btn'])){
 
       <form method="post">
         <div class="input-group mb-3">
-          <input type="text" class="form-control" placeholder="phone" name="phone">
+          <input type="text" class="form-control" placeholder="username" name="username">
           <div class="input-group-append">
             <div class="input-group-text">
               <span class="fas fa-user"></span>
@@ -129,9 +130,9 @@ if(isset($_POST['sign_in_btn'])){
         </div>
       </form>
 
-      <p class="mb-1">
+      <!-- <p class="mb-1">
         <a href="forgot-password.html">I forgot my password</a>
-      </p>
+      </p> -->
     </div>
     <!-- /.card-body -->
   </div>

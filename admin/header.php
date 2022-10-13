@@ -5,7 +5,7 @@ include "../constant.inc.php";
 $script_filename =  explode('/',$_SERVER['SCRIPT_FILENAME']);
 $curr_path = $script_filename[count($script_filename)-1];
 
-$dashboard_active = $articleCorner_active = $new_article = $articles_list = $videoCorner_active = $new_video = $videos_list = $admins_list = $unique_visitors = $app_management = '';
+$dashboard_active = '';
 
 
 if($curr_path == 'admin_dashboard' || $curr_path == 'admin_dashboard.php'){
@@ -15,31 +15,6 @@ if($curr_path == 'admin_dashboard' || $curr_path == 'admin_dashboard.php'){
 elseif($curr_path == 'new_article' || $curr_path == 'new_article.php'){
   $new_article = "active";
   $articleCorner_active = "menu-is-opening menu-open";
-}
-elseif($curr_path == 'articles_list' || $curr_path == 'articles_list.php'){
-  $articles_list = "active";
-  $articleCorner_active = "menu-is-opening menu-open";
-}
-elseif($curr_path == 'new_video' || $curr_path == 'new_video.php'){
-  $new_video = "active";
-  $videoCorner_active = "menu-is-opening menu-open";
-}
-elseif($curr_path == 'videos_list' || $curr_path == 'videos_list.php'){
-  $videos_list = "active";
-  $videoCorner_active = "menu-is-opening menu-open";
-}
-
-// Admins and Visitors Corner
-elseif($curr_path == 'admins_list' || $curr_path == 'admins_list.php'){
-  $admins_list = "active";
-}
-elseif($curr_path == 'unique_visitors' || $curr_path == 'unique_visitors.php'){
-  $unique_visitors = "active";
-}
-
-// Important Features Corner
-elseif($curr_path == 'app_management' || $curr_path == 'app_management.php'){
-  $app_management = "active";
 }
 ?>
 <!DOCTYPE html>
@@ -101,7 +76,7 @@ elseif($curr_path == 'app_management' || $curr_path == 'app_management.php'){
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
-    <a href="admin_dashboard" class="brand-link">
+    <a href="admin_dashboard.php" class="brand-link">
       <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
       <span class="brand-text font-weight-light">Admin</span>
     </a>
@@ -133,7 +108,7 @@ elseif($curr_path == 'app_management' || $curr_path == 'app_management.php'){
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item">
-            <a href="admin_dashboard" class="nav-link <?php echo $dashboard_active;?>">
+            <a href="admin_dashboard.php" class="nav-link <?php echo $dashboard_active;?>">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
@@ -142,12 +117,12 @@ elseif($curr_path == 'app_management' || $curr_path == 'app_management.php'){
           </li>
 
 
-          <li class="nav-header">Blogs & Articles, Videos</li>
+          <!-- <li class="nav-header">Public</li>
           <li class="nav-item <?php echo $articleCorner_active;?>">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
-                Blogs & Articles
+                Registered Public
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -165,9 +140,9 @@ elseif($curr_path == 'app_management' || $curr_path == 'app_management.php'){
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
 
-          <li class="nav-item <?php echo $videoCorner_active;?>">
+          <!-- <li class="nav-item <?php echo $videoCorner_active;?>">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>
@@ -189,55 +164,33 @@ elseif($curr_path == 'app_management' || $curr_path == 'app_management.php'){
                 </a>
               </li>
             </ul>
-          </li>
+          </li> -->
 
-          <li class="nav-header">Admins, Visitors</li>
+          <li class="nav-header">Public</li>
           <li class="nav-item">
-            <a href="admins_list" class="nav-link <?php echo $admins_list;?>">
+            <a href="public_list.php" class="nav-link <?php echo $admins_list;?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Admin List
+                Registered Public
               </p>
             </a>
           </li>
 
-          <li class="nav-item">
-            <a href="unique_visitors" class="nav-link <?php echo $unique_visitors;?>">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Unique Visitors
-              </p>
-            </a>
-          </li>
+          
 
           <li class="nav-header">Important Tools</li>
+          
           <li class="nav-item">
-            <a href="backupDatabase" class="nav-link">
+            <a href="https://localhost/donation_web" target="blank" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
-                Backup Database
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="#" class="nav-link <?php echo $app_management;?>">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                App Management
-              </p>
-            </a>
-          </li>
-          <li class="nav-item">
-            <a href="https://www.indiatvonline.in/" target="blank" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Visit Website (ITO)
+                Visit Website
               </p>
             </a>
           </li>
           <li class="nav-header">Others</li>
           <li class="nav-item">
-            <a href="logout" class="nav-link">
+            <a href="logout.php" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Logout
