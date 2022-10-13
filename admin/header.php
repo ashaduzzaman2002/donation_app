@@ -11,6 +11,9 @@ $dashboard_active = '';
 if($curr_path == 'admin_dashboard' || $curr_path == 'admin_dashboard.php'){
   $dashboard_active = "active";
 }
+elseif($curr_path == 'public_list' || $curr_path == 'public_list.php'){
+  $public_list_active = "active";
+}
 // Articles and Videos Content
 elseif($curr_path == 'new_article' || $curr_path == 'new_article.php'){
   $new_article = "active";
@@ -63,22 +66,15 @@ elseif($curr_path == 'new_article' || $curr_path == 'new_article.php'){
         <a href="admin_dashboard" class="nav-link">Home</a>
       </li>
     </ul>
-    <!-- Right navbar links -->
-    <ul class="navbar-nav ml-auto">
-      <li class="nav-item">
-        <a class="nav-link" data-widget="fullscreen" href="#" role="button">
-          <i class="fas fa-expand-arrows-alt"></i>
-        </a>
-      </li>
-    </ul>
+    
   </nav>
   <!-- /.navbar -->
   <!-- Main Sidebar Container -->
   <aside class="main-sidebar sidebar-dark-primary elevation-4">
     <!-- Brand Logo -->
     <a href="admin_dashboard.php" class="brand-link">
-      <img src="dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
-      <span class="brand-text font-weight-light">Admin</span>
+      <img src="http://localhost/donation_app/frontend/images/logo.png" alt="AdminLTE Logo" class="brand-image elevation-3" style="opacity: .8">
+      <span class="brand-text font-weight-light">Donation Web</span>
     </a>
     <!-- Sidebar -->
     <div class="sidebar">
@@ -168,7 +164,7 @@ elseif($curr_path == 'new_article' || $curr_path == 'new_article.php'){
 
           <li class="nav-header">Public</li>
           <li class="nav-item">
-            <a href="public_list.php" class="nav-link <?php echo $admins_list;?>">
+            <a href="public_list.php" class="nav-link <?php echo $public_list_active;?>">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Registered Public
@@ -176,12 +172,10 @@ elseif($curr_path == 'new_article' || $curr_path == 'new_article.php'){
             </a>
           </li>
 
-          
-
           <li class="nav-header">Important Tools</li>
           
           <li class="nav-item">
-            <a href="https://localhost/donation_web" target="blank" class="nav-link">
+            <a href="http://localhost/donation_app/frontend/" target="blank" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
               <p>
                 Visit Website
