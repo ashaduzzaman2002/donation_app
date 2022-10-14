@@ -39,33 +39,6 @@
                 </thead>
                 <tbody id="dataRowField">
                   <tr></tr>
-                  
-                      <!-- <tr>
-                        <td><?php echo $value['id'];?></td>
-                        <td><img src="../assets/blog_images/<?php echo $value['cover_img'];?>" height="50px" width="100px" loading='lazy'/></td>
-                        <td><?php echo substr($value['title'], 0, 50).'...';?></td>
-                        <td><?php echo $value['category'];?></td>
-                        <td><?php echo date('jS M Y h:i', strtotime($value['updated_on']));?></td>
-                        <td><?php echo $value['status'];?></td>
-                        <td>
-                          <div class="btn-group">
-                            <button type="button" class="btn btn-info">Action</button>
-                            <button type="button" class="btn btn-info dropdown-toggle dropdown-icon" data-toggle="dropdown">
-                              <span class="sr-only">Toggle Dropdown</span>
-                            </button>
-                            <form id="blog_article_form<?php echo $value['id'];?>" method="POST" action="dataProcess">
-                              <div class="dropdown-menu" role="menu">
-                                <button type="submit" class="dropdown-item" name="activeArticle" form="blog_article_form<?php echo $value['id'];?>" value="<?php echo $value['id'];?>">Active</button>
-                                <button type="submit" class="dropdown-item" name="draftArticle" form="blog_article_form<?php echo $value['id'];?>" value="<?php echo $value['id'];?>">Draft</button>
-                                <button type="button" class="dropdown-item" onclick="location.href=('update_article?bid=<?php echo $value['id'];?>');">Update</button>
-                                <div class="dropdown-divider"></div>
-                                <button type="submit" class="dropdown-item" name="deleteArticle" form="blog_article_form<?php echo $value['id'];?>" value="<?php echo $value['id'];?>" onclick="return confirm('Are you sure to delete the News?');">Delete</button>
-                              </div>
-                            </form>
-                          </div>
-                        </td>
-                      </tr> -->
-                    
                 </tbody>
                 <tfoot>
                 <tr>

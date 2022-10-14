@@ -14,6 +14,12 @@ if($curr_path == 'admin_dashboard' || $curr_path == 'admin_dashboard.php'){
 elseif($curr_path == 'public_list' || $curr_path == 'public_list.php'){
   $public_list_active = "active";
 }
+elseif($curr_path == 'settings' || $curr_path == 'settings.php'){
+  $settings_active = "active";
+}
+elseif($curr_path == 'gallery_images' || $curr_path == 'gallery_images.php'){
+  $gallery_images_active = "active";
+}
 // Articles and Videos Content
 elseif($curr_path == 'new_article' || $curr_path == 'new_article.php'){
   $new_article = "active";
@@ -31,6 +37,8 @@ elseif($curr_path == 'new_article' || $curr_path == 'new_article.php'){
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+  <!-- Toastr -->
+  <link rel="stylesheet" href="plugins/toastr/toastr.min.css">
   <!-- daterange picker -->
   <link rel="stylesheet" href="plugins/daterangepicker/daterangepicker.css">
   <!-- DataTables -->
@@ -173,7 +181,14 @@ elseif($curr_path == 'new_article' || $curr_path == 'new_article.php'){
           </li>
 
           <li class="nav-header">Important Tools</li>
-          
+          <li class="nav-item">
+            <a href="gallery_images.php" class="nav-link <?php echo $gallery_images_active;?>">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Gallery Images
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="http://localhost/donation_app/frontend/" target="blank" class="nav-link">
               <i class="nav-icon fas fa-th"></i>
@@ -183,6 +198,14 @@ elseif($curr_path == 'new_article' || $curr_path == 'new_article.php'){
             </a>
           </li>
           <li class="nav-header">Others</li>
+          <li class="nav-item">
+            <a href="settings.php" class="nav-link <?php echo $settings_active;?>">
+              <i class="nav-icon fas fa-th"></i>
+              <p>
+                Settings
+              </p>
+            </a>
+          </li>
           <li class="nav-item">
             <a href="logout.php" class="nav-link">
               <i class="nav-icon fas fa-th"></i>

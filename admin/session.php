@@ -5,7 +5,28 @@ include "../dbcon.php";
 session_start();
 session_regenerate_id();
 
-if(isset($_COOKIE['admin_username']) && $_COOKIE['admin_username']!='' && isset($_COOKIE['admin_password']) && $_COOKIE['admin_password']!=''){
+if(isset($_SESSION['admin_username']) && $_SESSION['admin_username']!='' && isset($_SESSION['admin_password']) && $_SESSION['admin_password']!=''){
+  $username = getSafeValue($_SESSION['admin_username']);
+  $md_password = getSafeValue($_SESSION['admin_password']);
+
+  $res = mysqli_query($conn, "Select * from admin where username = '$username' and password = '$md_password'");
+  if(mysqli_num_rows($res) > 0){
+    while($row = mysqli_fetch_assoc($res)){
+      $_SESSION['admin_username'] = $username;
+      $_SESSION['admin_password'] = $md_password;
+      $_SESSION['admin_id'] = $row['id'];
+      $_SESSION['admin_fullName'] = $row['fullname'];
+      $_SESSION['admin_wallet'] = $row['wallet'];
+      $_SESSION['admin_phone'] = $row['phone'];
+      $_SESSION['admin_email'] = $row['email'];
+    }
+  }
+  else{
+    header("Location:index.php");
+  }
+}
+
+elseif(isset($_COOKIE['admin_username']) && $_COOKIE['admin_username']!='' && isset($_COOKIE['admin_password']) && $_COOKIE['admin_password']!=''){
   $username = getSafeValue($_COOKIE['admin_username']);
   $md_password = getSafeValue($_COOKIE['admin_password']);
 
@@ -18,30 +39,16 @@ if(isset($_COOKIE['admin_username']) && $_COOKIE['admin_username']!='' && isset(
       $_SESSION['admin_password'] = $md_password;
       $_SESSION['admin_id'] = $row['id'];
       $_SESSION['admin_fullName'] = $row['fullname'];
+      $_SESSION['admin_wallet'] = $row['wallet'];
+      $_SESSION['admin_phone'] = $row['phone'];
+      $_SESSION['admin_email'] = $row['email'];
     }
   }
   else{
     header("Location:index.php");
   }
 }
-elseif(isset($_SESSION['admin_username']) && $_SESSION['admin_username']!='' && isset($_SESSION['admin_password']) && $_SESSION['admin_password']!=''){
-  $username = getSafeValue($_SESSION['admin_username']);
-  $md_password = getSafeValue($_SESSION['admin_password']);
 
-  $res = mysqli_query($conn, "Select * from admin where username = '$username' and password = '$md_password'");
-  if(mysqli_num_rows($res) > 0){
-    while($row = mysqli_fetch_assoc($res)){
-      $_SESSION['admin_username'] = $username;
-      $_SESSION['admin_password'] = $md_password;
-      $_SESSION['admin_id'] = $row['id'];
-      $_SESSION['admin_fullName'] = $row['fullname'];
-    }
-  }
-  else{
-    header("Location:index.php");
-  }
-
-}
 else{
   header("Location:index.php");
 }

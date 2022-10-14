@@ -6,8 +6,8 @@ function getSafeValue($value){
 	return strip_tags(mysqli_real_escape_string($conn,$value));
 }
 
-$processStatus[0]["error"] = false;
-$processStatus[0]["message"] = "No Error";
+$processStatus["error"] = false;
+$processStatus["message"] = "No Error";
 
 $mandatoryVal = isset($_POST["admin_id"]) && isset($_POST["fullname"]) && isset($_POST["phone"]) && isset($_POST["email"]) && isset($_POST["password"]);
 
@@ -19,7 +19,7 @@ if($mandatoryVal){
     $password = getSafeValue($_POST['password']);
 
     // Validation Part
-    if($processStatus[0]["error"] == false && $admin_id > 0 && strlen($phone) == 13){
+    if($processStatus["error"] == false && $admin_id > 0 && strlen($phone) == 13){
 
         // Data Checking Part
         $sql= "Select * from admin where id='$admin_id' and password = '$password' LIMIT 1";
@@ -32,29 +32,28 @@ if($mandatoryVal){
             where id = '$admin_id' and password ='$password'
             ");
             if($conn->affected_rows > 0){
-                $processStatus[0]["error"] = false;
-                $processStatus[0]["message"] = "Basic Details Updated.";
+                $processStatus["error"] = false;
+                $processStatus["message"] = "Basic Details Updated.";
             }else{
                 // Error Part
-                $processStatus[0]["error"] = true;
-                $processStatus[0]["message"] = "Database Query Error. Approach Administrator. ";
+                $processStatus["error"] = true;
+                $processStatus["message"] = "Database Query Error. Approach Administrator. ";
             }
         }else{
             // Error Part
-            $processStatus[0]["error"] = true;
-            $processStatus[0]["message"] = "No such account.";
+            $processStatus["error"] = true;
+            $processStatus["message"] = "No such account.";
         }
     } else{
         // Error Part
-        $processStatus[0]["error"] = true;
-        $processStatus[0]["message"] = "Sent Invalid Data. Please check.";
+        $processStatus["error"] = true;
+        $processStatus["message"] = "Sent Invalid Data. Please check.";
     }
 }else{
     // Error Part
-    $processStatus[0]["error"] = true;
-    $processStatus[0]["message"] = "FN, ADDR, PIN, PHN, EM, ID, PWD is mandatory.";
+    $processStatus["error"] = true;
+    $processStatus["message"] = "FN, ADDR, PIN, PHN, EM, ID, PWD is mandatory.";
 }
 mysqli_close($conn);
-header('Content-Type: application/json');
 echo json_encode($processStatus);
 ?>

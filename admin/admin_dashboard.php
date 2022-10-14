@@ -1,5 +1,13 @@
 <?php 
 require "header.php";
+
+$totalEarning = $_SESSION['admin_wallet'];
+$totalPublicRegistration = 0;
+$totalPost = 0;
+$res = $conn->query("Select * from public");
+$totalPublicRegistration = $res->num_rows;
+$res = $conn->query("Select * from post_feed");
+$totalPost = $res->num_rows;
 ?>
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
@@ -24,12 +32,50 @@ require "header.php";
     <!-- Main content -->
     <section class="content">
       <div class="container-fluid">
+        <!-- Small boxes (Stat box) -->
         <div class="row">
-          <div class="col-md-12">
-            
-            <!-- /.card -->
+          <div class="col-lg-4 col-6">
+            <!-- small box -->
+            <div class="small-box bg-info">
+              <div class="inner">
+                <h3>₹ <?php echo $totalEarning;?></h3>
+                <p>Earning</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-bag"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
           </div>
-          <!-- /.col -->
+          <!-- ./col -->
+          <div class="col-lg-4 col-6">
+            <!-- small box -->
+            <div class="small-box bg-warning">
+              <div class="inner">
+                <h3><?php echo $totalPublicRegistration;?></h3>
+                <p>Public Registrations</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-person-add"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
+          <div class="col-lg-4 col-6">
+            <!-- small box -->
+            <div class="small-box bg-danger">
+              <div class="inner">
+                <h3><?php echo $totalPost;?></h3>
+                <p>Total Post</p>
+              </div>
+              <div class="icon">
+                <i class="ion ion-pie-graph"></i>
+              </div>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+          </div>
+          <!-- ./col -->
         </div>
         <!-- /.row -->
       </div><!--/. container-fluid -->
